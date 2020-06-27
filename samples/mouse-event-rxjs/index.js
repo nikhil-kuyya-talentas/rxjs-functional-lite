@@ -1056,6 +1056,19 @@ var MergeMapSubscriber = /*@__PURE__*/ (function (_super) {
     return MergeMapSubscriber;
 }(OuterSubscriber));
 
+/** PURE_IMPORTS_START _mergeMap,_util_identity PURE_IMPORTS_END */
+function mergeAll(concurrent) {
+    if (concurrent === void 0) {
+        concurrent = Number.POSITIVE_INFINITY;
+    }
+    return mergeMap(identity, concurrent);
+}
+
+/** PURE_IMPORTS_START _mergeAll PURE_IMPORTS_END */
+function concatAll() {
+    return mergeAll(1);
+}
+
 /** PURE_IMPORTS_START _Observable,_util_isArray,_util_isFunction,_operators_map PURE_IMPORTS_END */
 function fromEvent(target, eventName, options, resultSelector) {
     if (isFunction(options)) {
@@ -1112,11 +1125,6 @@ function isJQueryStyleEventEmitter(sourceObj) {
 }
 function isEventTarget(sourceObj) {
     return sourceObj && typeof sourceObj.addEventListener === 'function' && typeof sourceObj.removeEventListener === 'function';
-}
-
-/** PURE_IMPORTS_START _mergeMap PURE_IMPORTS_END */
-function concatMap(project, resultSelector) {
-    return mergeMap(project, resultSelector, 1);
 }
 
 /** PURE_IMPORTS_START tslib,_OuterSubscriber,_util_subscribeToResult PURE_IMPORTS_END */
@@ -3199,18 +3207,20 @@ const click = fromEvent(document, 'click').pipe(tap(console.log)).subscribe();
 const Color$1 = color;
 const mouseDown = fromEvent(document, 'mousedown');
 const mouseUp = fromEvent(document, 'mouseup');
-const mouseMove = fromEvent(document, 'mousemove');
+const mouseMove = fromEvent(document, 'mousemove').pipe(takeUntil(mouseUp));
 const documentBody = document.getElementsByTagName('body')[0];
-const mouseMoveSubscription = mouseDown.pipe(concatMap(event => {
-    return mouseMove.pipe(takeUntil(mouseUp));
-}), tap((evt) => {
+const mouseMoveSub = mouseMove.pipe(tap(console.log)).subscribe();
+const mouseDragPromise = mouseDown.pipe(map(event => {
+    return mouseMove;
+}), concatAll()).forEach(mouseEventHandler);
+function mouseEventHandler(evt) {
     const element = document.createElement('div');
     const x = evt.clientX;
     const y = evt.clientY;
-    element.innerText = `x : ${x}, y : ${y}`;
+    element.innerText = `x : ${x}, y : ${y} - ${evt.type}`;
     documentBody.append(element);
     const colorValue = Color$1(`rgb(${x % 255},${(y % 255)},${(x * y) % 255})`);
     const hex = colorValue.hex();
     const backgroundColor = `background-color  : ${hex}`;
     documentBody.setAttribute('style', backgroundColor);
-})).subscribe();
+}
