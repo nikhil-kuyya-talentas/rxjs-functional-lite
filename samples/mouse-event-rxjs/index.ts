@@ -5,18 +5,18 @@ import * as ColorPk from 'color';
 const click = fromEvent(document,'click').pipe(tap(console.log)).subscribe()
 const Color = ColorPk.default;
 
-const mouseDown = fromEvent(document,'mousedown');
+const mouseDown$ = fromEvent(document,'mousedown');
 
-const mouseUp = fromEvent(document,'mouseup');
-const mouseMoveTillMouseUp = fromEvent(document,'mousemove').pipe(takeUntil(mouseUp));
+const mouseUp$ = fromEvent(document,'mouseup');
+const mouseMoveTillMouseUp$ = fromEvent(document,'mousemove').pipe(takeUntil(mouseUp$));
 
 const documentBody = document.getElementsByTagName('body')[0];
 
-const mouseMoveSub = mouseMoveTillMouseUp.pipe(tap(console.log)).subscribe();
+const mouseMoveSub = mouseMoveTillMouseUp$.pipe(tap(console.log)).subscribe();
 
-const mouseDragPromise = mouseDown.pipe(
+const mouseDragPromise = mouseDown$.pipe(
     map(event => {
-       return  mouseMoveTillMouseUp;
+       return  mouseMoveTillMouseUp$;
     }),concatAll()).forEach(mouseEventHandler);
 
 
