@@ -6,13 +6,17 @@ const click = fromEvent(document,'click').pipe(tap(console.log)).subscribe()
 const Color = ColorPk.default;
 
 const mouseDown = fromEvent(document,'mousedown');
+
 const mouseUp = fromEvent(document,'mouseup');
-const mouseMove = fromEvent(document,'mousemove').pipe(takeUntil(mouseUp));
+const mouseMoveTillMouseUp = fromEvent(document,'mousemove').pipe(takeUntil(mouseUp));
+
 const documentBody = document.getElementsByTagName('body')[0];
-const mouseMoveSub = mouseMove.pipe(tap(console.log)).subscribe();
+
+const mouseMoveSub = mouseMoveTillMouseUp.pipe(tap(console.log)).subscribe();
+
 const mouseDragPromise = mouseDown.pipe(
     map(event => {
-       return  mouseMove;
+       return  mouseMoveTillMouseUp;
     }),concatAll()).forEach(mouseEventHandler);
 
 
