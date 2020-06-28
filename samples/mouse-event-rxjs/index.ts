@@ -11,10 +11,9 @@ const documentBody = document.getElementsByTagName('body')[0];
 mouseMoveTillMouseUp$.pipe(tap(console.log)).subscribe();
 
 mouseDown$.pipe(
-        map(() => {
+        concatMap(() => {
             return  mouseMoveTillMouseUp$;
-        }),
-        concatAll()
+        })        
 ).forEach(mouseEventHandler);
 
 
