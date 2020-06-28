@@ -10,7 +10,9 @@ export default [{
       dir: './',
       format: 'cjs'
     }],
-    plugins : [nodeResolve(),commonjs(), typescript(),multiInput(),serve({
+    plugins : [ multiInput(), typescript(), commonjs(),nodeResolve({
+      browser: true
+    }), serve({
       open : true,
       host: 'localhost',
       port : 12345,
