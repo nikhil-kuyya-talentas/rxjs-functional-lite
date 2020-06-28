@@ -1,9 +1,9 @@
-document.onreadystatechange = function(ev) {
+document.onreadystatechange = function() {
 
     function complete() {
         document.addEventListener('mousedown',function() {
             document.addEventListener('mousemove',mouseMoveEventHanlder);
-            document.addEventListener('mouseup', function(evt) {
+            document.addEventListener('mouseup', function(){
                 document.removeEventListener('mousemove',mouseMoveEventHanlder);
             })
         })

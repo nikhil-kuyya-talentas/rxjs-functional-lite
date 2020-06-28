@@ -2,9 +2,8 @@ import { bookmarks,boxarts,lists,videos} from './input';
 import { output } from './output';
 import { of, from, zip } from 'rxjs';
 import { map, filter, reduce, concatAll, concatMap} from 'rxjs/operators';
-const test = require('tape');
-        
-const result = from(lists).pipe(
+
+from(lists).pipe(
     concatMap(list => {
         return from(videos).pipe(filter((video) => {
         return video.listId === list.id

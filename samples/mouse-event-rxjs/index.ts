@@ -1,23 +1,21 @@
 import {fromEvent } from 'rxjs';
-import { filter, tap, takeUntil, map, concatMap, switchMap, take, concatAll } from 'rxjs/operators';
-import * as ColorPk from 'color';
+import { filter, tap, takeUntil, map, concatMap, take, concatAll } from 'rxjs/operators';
 
-const click = fromEvent(document,'click').pipe(tap(console.log)).subscribe()
-const Color = ColorPk.default;
-
-const mouseDown$ = fromEvent(document,'mousedown');
-
-const mouseUp$ = fromEvent(document,'mouseup');
-const mouseMoveTillMouseUp$ = fromEvent(document,'mousemove').pipe(takeUntil(mouseUp$));
+// const click = fromEvent(document,'click').pipe(tap(console.log)).subscribe()
+const mouseDown$ = fromEvent<MouseEvent>(document,'mousedown');
+const mouseUp$ = fromEvent<MouseEvent>(document,'mouseup');
+const mouseMoveTillMouseUp$ = fromEvent<MouseEvent>(document,'mousemove').pipe(takeUntil(mouseUp$));
 
 const documentBody = document.getElementsByTagName('body')[0];
 
-const mouseMoveSub = mouseMoveTillMouseUp$.pipe(tap(console.log)).subscribe();
+mouseMoveTillMouseUp$.pipe(tap(console.log)).subscribe();
 
-const mouseDragPromise = mouseDown$.pipe(
-    map(event => {
-       return  mouseMoveTillMouseUp$;
-    }),concatAll()).forEach(mouseEventHandler);
+mouseDown$.pipe(
+        map(() => {
+            return  mouseMoveTillMouseUp$;
+        }),
+        concatAll()
+).forEach(mouseEventHandler);
 
 
 function mouseEventHandler(evt: MouseEvent) : void {
@@ -26,9 +24,9 @@ function mouseEventHandler(evt: MouseEvent) : void {
     const y = evt.clientY;
     element.innerText = `x : ${x}, y : ${y} - ${evt.type}`;
     documentBody.append(element);
-    const colorValue = Color(`rgb(${x % 255},${(y % 255)},${(x * y) % 255})`);
-    const hex = colorValue.hex();
-    const backgroundColor = `background-color  : ${hex}`;
+    // const colorValue = color(`rgb(${x % 255},${(y % 255)},${(x * y) % 255})`);
+    // const hex = colorValue.hex();
+    const backgroundColor = `background-color  : red`;
     documentBody.setAttribute('style', backgroundColor);
 }
 
