@@ -21,7 +21,7 @@ export default [{
       eslint(),
       babel({
         exclude: 'node_modules/**',
-      }),
+      }),    
      serve({
       open : true,
       host: 'localhost',
