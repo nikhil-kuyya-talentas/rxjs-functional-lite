@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc index.ts",
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "buildall": "rollup --config -w"
   },
   "author": "",
   "license": "ISC",
@@ -15,5 +15,13 @@
     "jquery": "^3.5.1",
     "rxjs": "^6.5.5",
     "typescript": "^3.9.5"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^8.1.0",
+    "@rollup/plugin-typescript": "^5.0.0",
+    "esm": "^3.2.25",
+    "rollup": "^2.18.0",
+    "rollup-plugin-multi-input": "^1.1.1",
+    "rollup-plugin-serve": "^1.0.1"
   }
 }
