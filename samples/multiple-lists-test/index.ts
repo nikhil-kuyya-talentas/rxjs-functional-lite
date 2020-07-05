@@ -31,6 +31,8 @@ from(lists).pipe(
     })
 ).forEach(console.log);
 
+// from(lists).forEach(console.log);
+// of(lists).forEach(console.log)
 
 
 
