@@ -28,7 +28,7 @@ export default [{
       port : 12345,
       verbose : true,
       contentBase : 'samples'      
-    })]
-}
-];
+    }),
+  ]
+}];
 
