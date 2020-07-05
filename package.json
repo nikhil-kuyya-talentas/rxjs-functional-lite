@@ -6,12 +6,24 @@
   "scripts": {
     "build": "tsc index.ts",
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:all": "rollup --config -w"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@rollup/plugin-run": "^2.0.2",
+    "@types/jquery": "^3.5.0",
+    "jquery": "^3.5.1",
     "rxjs": "^6.5.5",
     "typescript": "^3.9.5"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^8.1.0",
+    "@rollup/plugin-typescript": "^5.0.0",
+    "esm": "^3.2.25",
+    "rollup": "^2.18.0",
+    "rollup-plugin-multi-input": "^1.1.1",
+    "rollup-plugin-serve": "^1.0.1",
+    "rollup-plugin-sourcemaps": "^0.6.2"
   }
 }
