@@ -11,13 +11,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@rollup/plugin-run": "^2.0.2",
-    "@types/jquery": "^3.5.0",
-    "jquery": "^3.5.1",
     "rxjs": "^6.5.5",
     "typescript": "^3.9.5"
   },
   "devDependencies": {
+    "@rollup/plugin-run": "^2.0.2",
     "@rollup/plugin-node-resolve": "^8.1.0",
     "@rollup/plugin-typescript": "^5.0.0",
     "esm": "^3.2.25",
