@@ -6,10 +6,10 @@ import commonjs from "rollup-plugin-commonjs";
 
 export default [
   {
-    input: "./samples/mouse-event/index.ts",
+    input: "./samples/mouse-event-rxjs/index.ts",
     output: [
       {
-        dir: "./samples/mouse-event/",
+        dir: "./samples/mouse-event-rxjs/",
         entryFileNames: "index.js",
         format: "cjs",
       },
@@ -24,7 +24,7 @@ export default [
         host: "localhost",
         port: 12345,
         verbose: true,
-        contentBase: "samples/mouse-event",
+        contentBase: "samples/mouse-event-rxjs",
       }),
     ],
   },
