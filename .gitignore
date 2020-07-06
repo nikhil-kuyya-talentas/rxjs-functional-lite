@@ -1,4 +1,3 @@
 node_modules
 samples/**/index.js
-*.js
-*Map-*.js
+-*.js

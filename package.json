@@ -4,7 +4,8 @@
   "description": "reactive rxjs",
   "main": "index.ts",
   "scripts": {
-    "build:all": "rollup --config -w",
+    "build:one": "rollup --config two-list.config.js -w",
+    "build:two": "rollup --config multiple-list.config.js -w",
     "build:test:all": "tape ./samples/**-test/index.js | tap-html -o ./samples/index.html",
     "test:all": "node tap.js ./samples/**-test/index.js"
   },
